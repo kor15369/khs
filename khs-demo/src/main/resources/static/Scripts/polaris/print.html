@@ -1,0 +1,191 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Polaris Office Web Print</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <style type="text/css">
+            #spinner {
+                z-index: 9999;
+                width: 100%;
+                position: fixed;
+                top: calc(50% - 5px);
+                /* left: calc(50% - 200px); */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .bar {
+                width: 100%;
+                height: 10px;
+                margin-top: 10px;
+                font-size: 0;
+                border-radius: 3px;
+                background-size: 28px 28px;
+                animation: loading 0.5s linear infinite;
+            }
+            #spinner .bar {
+                border: 1px solid #6ca7f0;
+                background-image: repeating-linear-gradient(
+                    -45deg,
+                    #6ca7f0,
+                    #6ca7f0 11px,
+                    #fff 10px,
+                    #fff 20px
+                );
+            }
+
+            .waitingMsgWrapper,
+            #spinner {
+                font-size: 1.5rem;
+            }
+            @keyframes loading {
+                0% {
+                    background-position: 0 0;
+                }
+                100% {
+                    background-position: 28px 0;
+                }
+            }
+            body {
+                margin: 0;
+                overflow: hidden;
+                font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+                    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                    sans-serif;
+            }
+
+            .blanket {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: rgba(255, 255, 255, 0.95);
+                width: 100%;
+                height: 100%;
+            }
+
+            @keyframes backgroundMove {
+                100% {
+                    background-position: -1900px;
+                }
+            }
+
+            .animationBar {
+                width: 100px;
+                height: 40px;
+                background-image: url('./progress_loop.png');
+                animation: backgroundMove 0.9s steps(19) infinite;
+                transform: translate(0, -10px) scale(1.3, 1.3);
+                margin-bottom: 10px;
+            }
+
+            .pageWrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                page-break-after: always;
+            }
+        </style>
+
+        <script>
+            const promiseArr = new Array();
+            let pageCnt = 0;
+
+            window.addEventListener(
+                'message',
+                (event) => {
+                    console.log(`receive message`);
+                    if (event.origin != location.origin) return;
+
+                    if (typeof event.data == 'object') {
+                        const rootData = event.data;
+                        if (rootData.status != undefined) {
+                            console.log(`receive message rootData.status=${rootData.status}`);
+                            if (rootData.status == 'end') {
+                                Promise.all(promiseArr).then(function () {
+                                    document.querySelector('#spinner').style.visibility = 'hidden';
+                                    document.querySelector('.blanket').style.visibility = 'hidden';
+
+                                    window.print();
+                                    window.close();
+                                });
+                            } else {
+                                promiseArr.push(
+                                    new Promise(function (resolve, reject) {
+                                        const div = window.document.createElement('div');
+                                        const pageCnt = window.document.querySelector('#pageCnt');
+
+                                        div.className = 'pageWrapper';
+
+                                        //div.setAttribute('style', 'page-break-before:always');
+
+                                        const {
+                                            width,
+                                            height,
+                                            image: printImage,
+                                            curPage,
+                                            totalPage,
+                                            waitingMsg,
+                                            cancelText
+                                        } = rootData;
+
+                                        if (curPage === 1) {
+                                            const styleTag = document.createElement('style');
+                                            styleTag.setAttribute('media', 'print');
+                                            styleTag.textContent = `html{zoom:94%} @page {
+                        size: ${width > height ? 'landscape' : 'portrait'}; 
+                        margin: 0;
+                      }`;
+                                            document
+                                                .getElementsByTagName('head')[0]
+                                                .appendChild(styleTag);
+
+                                            const waitingMsgObj = window.document.querySelector(
+                                                '#waitingMsg'
+                                            );
+                                            waitingMsgObj.textContent = waitingMsg;
+
+                                            const cancelLink = window.document.querySelector(
+                                                '#cancelLink'
+                                            );
+                                            cancelLink.textContent = cancelText;
+                                        }
+
+                                        const image = new Image();
+                                        image.width = width;
+                                        image.height = height;
+                                        image.onload = function () {
+                                            div.appendChild(image);
+                                            window.document.body.appendChild(div);
+                                            resolve();
+                                        };
+                                        image.src = printImage;
+                                        pageCnt.textContent = `${curPage} / ${totalPage}`;
+                                    })
+                                );
+                            }
+                        }
+                    }
+                },
+                false
+            );
+        </script>
+    </head>
+
+    <body>
+        <div class="blanket"></div>
+        <div id="spinner">
+            <div class="animationBar"></div>
+            <div class="waitingMsgWrapper">
+                <span id="waitingMsg"> </span> <span id="pageCnt"></span>
+            </div>
+
+            <a id="cancelLink" href="#" onclick="window.close(); return false;"></a>
+
+            <!-- <div class="bar">printing..</div> -->
+        </div>
+    </body>
+</html>

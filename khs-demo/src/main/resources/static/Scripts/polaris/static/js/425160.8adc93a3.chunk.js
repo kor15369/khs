@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpolaris_weboffice=self.webpackChunkpolaris_weboffice||[]).push([[425160],{425160:function(A){A.exports="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAAC4uLj///+oqKjK4P89bsmnTOhnAAAAAnRSTlMA2hCV9vIAAAA1SURBVCjPYyAHMBojgCFIgFlJSRmOqCZgbGwaGhoKsQaqQtXFxRWigjKB4WkLI5IthgxUAQClHDQg0E85jgAAAABJRU5ErkJggg=="}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpolaris_weboffice=self.webpackChunkpolaris_weboffice||[]).push([[120014],{120014:function(e,s,i){e.exports=i.p+"static/media/banner.0280176265910894e14e.png"}}]);

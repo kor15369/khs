@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpolaris_weboffice=self.webpackChunkpolaris_weboffice||[]).push([[986691],{986691:function(e,s,a){e.exports=a.p+"static/media/icon_main_my_canvers.ed8927f3e24bbdafafd0.svg"}}]);

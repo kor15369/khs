@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpolaris_weboffice=self.webpackChunkpolaris_weboffice||[]).push([[739032],{739032:function(e,a,s){e.exports=s.p+"static/media/splash.aa0199cd2ea47d4042ca.gif"}}]);
