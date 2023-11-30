@@ -1,0 +1,143 @@
+<style>
+    .ui-state-focus:focus { outline: none; !important }
+    .my_work_tbl table td a {word-break: break-all;}
+    .my_work_tbl .tbl-col-row01 {table-layout:fixed;}
+    
+    .work_search li {margin: 10px;}
+</style>
+
+<div id="landing_bridge_pop_external_url_area" class="pop_area_wrap">
+    <div class="sgl-pop">
+        <div id="external_url_wrap" class="flex-column-bx">
+            <div class="flex-column-item">
+                <div class="work_search">
+                    <ul>
+                        <li>
+                           <label for="cboCategory" style="width:30%;">최종카테고리</label>
+                           <select id="cboCategory" style="width:150px;"></select>
+                        </li>
+                        <li>
+                           <label for="cboAgent" style="width:30%;">주체구분</label>
+                           <select id="cboAgent" style="width:150px;"></select>
+                        </li>
+                        <li>
+                           <label for="cboCharge" style="width:30%;">유/무료</label>
+                           <select id="cboCharge" style="width:150px;"></select>
+                        </li>
+                        <li>
+                           <label for="cboLanguage" style="width:30%;">언어</label>
+                           <select id="cboLanguage" style="width:150px;"></select>
+                        </li>
+                        <li>
+                           <label for="externalUrlSearch">검색</label>
+                           <input type="text" id="externalUrlSearch" data-woe="false" placeholder="검색어를 입력하세요" style="width:200px">
+                        </li>
+                    </ul>
+                </div>
+                <div id="externalUrlList" class="flex-column-item">
+                    <div class="my_work_tbl tbl-fixed-scroll scroll-design">
+                        <table class="tbl-col-row01 csTableTableRowHover csTableTableSelector csTableTable_S" >
+                            <caption>외부 사이트 조회</caption>
+                            <colgroup> 
+                                <col style="width: 15%;">
+                                <col style="width: 30%;">
+                                <col style="width: 20%;">
+                                <col style="width: 10%">
+                                <col style="width: 10%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="sticky-thead01 align_left" scope="col">사이트명</th>
+                                    <th class="sticky-thead01 align_left" scope="col">설명</th>
+                                    <th class="sticky-thead01 align_left" scope="col">URL</th>
+                                    <th class="sticky-thead01 align_left" scope="col">최종카테고리
+                            <!--            <i class="cs_icons coladvfilters csTableFilterIcon" title="컬럼 필터 : "></i>-->
+                            <!--            <div class="csFilterDialogDiv csColumnFilterSelector" style="display: none;">-->
+                    					   <!-- <div class="csTableFilterContainer">-->
+                    						  <!--  <table class="csTableFilterTable">-->
+                    						  <!--      <tbody>-->
+                    							 <!--       <tr class="templateFilterDialogRow csTableFilterRow" style="display: none;">-->
+                    								<!--        <td>-->
+                    								<!--	        <input class="csTableFilterCheckbox" type="checkbox" checked="">-->
+                    								<!--        </td>-->
+                    								<!--        <td>-->
+                    								<!--	        <span class="csTableFilterText"></span>-->
+                    								<!--        </td>-->
+                    							 <!--       </tr>-->
+                    							 <!--   </tbody>-->
+                    						  <!--  </table>-->
+                    					   <!-- </div>-->
+                    				    <!--</div>-->
+                                    </th>
+                                    <th class="sticky-thead01" scope="col">주체구분
+                            <!--            <i class="cs_icons coladvfilters csTableFilterIcon" title="컬럼 필터 : "></i>-->
+                            <!--            <div class="csFilterDialogDiv csColumnFilterSelector" style="display: none;">-->
+                    					   <!-- <div class="csTableFilterContainer">-->
+                    						  <!--  <table class="csTableFilterTable">-->
+                    						  <!--      <tbody>-->
+                    							 <!--       <tr class="templateFilterDialogRow csTableFilterRow" style="display: none;">-->
+                    								<!--        <td>-->
+                    								<!--	        <input class="csTableFilterCheckbox" type="checkbox" checked="">-->
+                    								<!--        </td>-->
+                    								<!--        <td>-->
+                    								<!--	        <span class="csTableFilterText"></span>-->
+                    								<!--        </td>-->
+                    							 <!--       </tr>-->
+                    							 <!--   </tbody>-->
+                    						  <!--  </table>-->
+                    					   <!-- </div>-->
+                    				    <!--</div>-->
+                                    </th>
+                                    <th class="sticky-thead01" scope="col">유/무료
+                            <!--            <i class="cs_icons coladvfilters csTableFilterIcon" title="컬럼 필터 : "></i>-->
+                            <!--            <div class="csFilterDialogDiv csColumnFilterSelector" style="display: none;">-->
+                    					   <!-- <div class="csTableFilterContainer">-->
+                    						  <!--  <table class="csTableFilterTable">-->
+                    						  <!--      <tbody>-->
+                    							 <!--       <tr class="templateFilterDialogRow csTableFilterRow" style="display: none;">-->
+                    								<!--        <td>-->
+                    								<!--	        <input class="csTableFilterCheckbox" type="checkbox" checked="">-->
+                    								<!--        </td>-->
+                    								<!--        <td>-->
+                    								<!--	        <span class="csTableFilterText"></span>-->
+                    								<!--        </td>-->
+                    							 <!--       </tr>-->
+                    							 <!--   </tbody>-->
+                    						  <!--  </table>-->
+                    					   <!-- </div>-->
+                    				    <!--</div>-->
+                                    </th>
+                                    <th class="sticky-thead01" scope="col">언어
+                            <!--            <i class="cs_icons coladvfilters csTableFilterIcon" title="컬럼 필터 : "></i>-->
+                            <!--            <div class="csFilterDialogDiv csColumnFilterSelector" style="display: none;">-->
+                    					   <!-- <div class="csTableFilterContainer">-->
+                    						  <!--  <table class="csTableFilterTable">-->
+                    						  <!--      <tbody>-->
+                    							 <!--       <tr class="templateFilterDialogRow csTableFilterRow" style="display: none;">-->
+                    								<!--        <td>-->
+                    								<!--	        <input class="csTableFilterCheckbox" type="checkbox" checked="">-->
+                    								<!--        </td>-->
+                    								<!--        <td>-->
+                    								<!--	        <span class="csTableFilterText"></span>-->
+                    								<!--        </td>-->
+                    							 <!--       </tr>-->
+                    							 <!--   </tbody>-->
+                    						  <!--  </table>-->
+                    					   <!-- </div>-->
+                    				    <!--</div>-->
+                                    </th>
+                                    <th class="sticky-thead01" scope="col">즐겨찾기</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
